@@ -2,7 +2,8 @@
 
 SN Covid Project
 
-## Le but est de mettre en place un système de suivi et de déclaration des cas de Covid
+## Objectif
+Le but est de mettre en place un système de suivi et de déclaration des cas de Covid
 
 ### 1) Formulaire permettant à une personne suspectant un cas de Covid chez elle-même ou un proche de se signaler.
 ### 2) Système permettant de suivre les cas confinés + déclaration journalière de ses constantes
@@ -10,5 +11,5 @@ SN Covid Project
 
 
 ## Prérequis 
-#Bonnes connaissances en PHP/Symfony
-# Bonne volonté
+Bonnes connaissances en PHP/Symfony
+Bonne volonté

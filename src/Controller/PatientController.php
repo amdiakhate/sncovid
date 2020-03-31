@@ -2,46 +2,30 @@
 
 namespace App\Controller;
 
-use App\Entity\Comorbidity;
 use App\Entity\ComorbidityPatient;
 use App\Entity\Patient;
 use App\Form\ComorbidityPatientType;
-use App\Form\PatientType;
-use App\Form\SuspiciousType;
 use App\Manager\PatientManager;
 use App\Repository\ComorbidityRepository;
-use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class UserController extends AbstractController
+class PatientController extends AbstractController
 {
-    /**
-     * @Route("/user", name="user")
-     */
-    public function index()
-    {
-        return $this->render(
-            'user/index.html.twig',
-            [
-                'controller_name' => 'UserController',
-            ]
-        );
-    }
 
     /**
      * @Route("/suspicious", name="suspicious")
      * @param Request               $request
      * @param ComorbidityRepository $comorbidityRepository
      * @param PatientManager        $patientManager
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @return Response
      */
     public function suspicious(
         Request $request,
@@ -57,9 +41,9 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $patient = $form->getData();
+            $patient->setSelfDeclare(true);
             $comorbiditiesPatient = [];
-            foreach($comorbidities as $comorbidity)
-            {
+            foreach ($comorbidities as $comorbidity) {
 //                Get the comorbidities as well
                 $comorbidyPatient = new ComorbidityPatient();
                 $comorbidyPatient->setPatient($patient);
@@ -67,12 +51,16 @@ class UserController extends AbstractController
                 $comorbidyPatient->setValue($form[$comorbidity->getName()]->getData()['value']);
                 $comorbiditiesPatient[] = $comorbidyPatient;
             }
-            $patientManager->savePatient($patient, $comorbiditiesPatient);
+
+            $save = $patientManager->savePatient($patient, $comorbiditiesPatient);
+            if ($save) {
+                return $this->render('user/suspicious/success.html.twig');
+            }
 
         }
 
         return $this->render(
-            'user/suspicious.html.twig',
+            'user/suspicious/suspicious.html.twig',
             [
                 'form' => $form->createView(),
                 'comorbidities' => $comorbidities,
@@ -80,7 +68,7 @@ class UserController extends AbstractController
         );
     }
 
-    private function generateSuspisciousForm($patient, array $comorbidities)
+    private function generateSuspisciousForm($patient, array $comorbidities, bool $complete = false)
     {
         $form = $this->createFormBuilder($patient)
             ->add(
@@ -101,7 +89,7 @@ class UserController extends AbstractController
                 'sex',
                 ChoiceType::class,
                 [
-                    'label'=>'form.sex',
+                    'label' => 'form.sex',
                     'choices' => [
                         'form.male' => 'h',
                         'form.female' => 'f',
@@ -112,13 +100,10 @@ class UserController extends AbstractController
                 'bithdate',
                 DateType::class,
                 [
-                    'label' => 'form.birthday',
+                    'label'=>'form.birthdate',
+                    'widget' => 'single_text',
                 ]
             )
-//            ->add('bithdate', DateType::class, [
-//                'html5' => false,
-//                'attr' => ['class' => 'js-datepicker'],
-//            ])
             ->add(
                 'address',
                 TextType::class,
@@ -128,44 +113,46 @@ class UserController extends AbstractController
             )
             ->add(
                 'phone',
-                TextType::class,
+                TelType::class,
                 [
                     'label' => 'form.phone',
                 ]
             )
             ->add(
                 'email',
-                TextType::class,
+                EmailType::class,
                 [
-                    'label' => 'Email',
+                    'label' => 'form.email',
                 ]
             )
             ->add(
                 'otherNumber',
-                TextType::class,
+                TelType::class,
                 [
-                    'label' => 'Numéro de téléphone mobile d’un contact tiers',
+                    'required' => false,
+                    'label' => 'form.otherPhone',
                 ]
             )
             ->add(
                 'referentDoctor',
                 TextType::class,
                 [
-                    'label' => 'Médecin généraliste référent du patient (coordonnées)',
+                    'required' => false,
+                    'label' => 'form.referentDoctor',
                 ]
             )
             ->add(
                 'pregnant',
                 null,
                 [
-                    'label' => 'Enceinte ?',
+                    'label' => 'form.pregnant',
                 ]
             )
             ->add(
                 'background',
                 null,
                 [
-                    'label' => 'Traitements au long cours notables',
+                    'label' => 'form.background',
                 ]
             );
 
@@ -179,6 +166,8 @@ class UserController extends AbstractController
                 ]
             );
         }
+
+//            Todo  we're creating a real patient
 
         return $form
             ->getForm();

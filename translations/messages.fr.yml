@@ -1,16 +1,26 @@
-declare_suspicious: Déclarer un cas suspect
+declare_suspicious: Déclaration d'un cas suspect
 firstname: Prénom
 yes: Oui
 no: Non
-suspiscious_text: Vous suspectez un cas de COvid
+suspiscious_text: Vous suspectez un cas de Covid-19 chez vous ou chez l'un de vos proches ? Merci de remplir ce questionnaire, les services santé prendront contact avec vous si jamais le cas s'avère suspect
+security_informations: Vos données personnelles sont protégées et ne seront en aucun cas partagées.
 personal_infos: Informations personnelles
 background_infos: Antécédents médicaux
+background_infos_message: Merci de répondre à ces questions avec le plus d'exactitude possible
+suspicious_submission_successful: Les données ont été soumises avec succès, merci de patienter, vous serez recontacté très vite.
 
 form:
-  firstname: Prénom
-  lastname: Nom
-  sex: Sexe
-  phone: Téléphone
-  address: Adresse
+  firstname: Prénom *
+  lastname: Nom *
+  sex: Sexe *
+  birthdate : Date de naissance *
+  email: Adresse email *
+  phone: Téléphone *
+  address: Adresse *
   male: Homme
   female: Féminin
+  pregnant: Si vous êtes une femme, cochez cette case si vous êtes enceinte
+  referentDoctor: Médecin généraliste référent du patient (coordonnées)
+  background: Traitements au long cours notables
+  otherPhone: Numéro de téléphone mobile d’un contact tiers
+  save: Soumettre les données

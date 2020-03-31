@@ -78,6 +78,61 @@ class Patient
      */
     private $comorbidityPatients;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $selfDeclare;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $initialInfection;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $daySymptoms;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dayDiagnostic;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $infiltrates;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $treatment;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $treatmentDetails;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dateTreatment;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $otherPeople;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $otherPeopleDetails;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $homeFollowUp;
+
     public function __construct()
     {
         $this->comorbidityPatients = new ArrayCollection();
@@ -249,6 +304,138 @@ class Patient
                 $comorbidityPatient->setPatient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSelfDeclare(): ?bool
+    {
+        return $this->selfDeclare;
+    }
+
+    public function setSelfDeclare(bool $selfDeclare): self
+    {
+        $this->selfDeclare = $selfDeclare;
+
+        return $this;
+    }
+
+    public function getInitialInfection(): ?string
+    {
+        return $this->initialInfection;
+    }
+
+    public function setInitialInfection(?string $initialInfection): self
+    {
+        $this->initialInfection = $initialInfection;
+
+        return $this;
+    }
+
+    public function getDaySymptoms(): ?\DateTimeInterface
+    {
+        return $this->daySymptoms;
+    }
+
+    public function setDaySymptoms(?\DateTimeInterface $daySymptoms): self
+    {
+        $this->daySymptoms = $daySymptoms;
+
+        return $this;
+    }
+
+    public function getDayDiagnostic(): ?\DateTimeInterface
+    {
+        return $this->dayDiagnostic;
+    }
+
+    public function setDayDiagnostic(?\DateTimeInterface $dayDiagnostic): self
+    {
+        $this->dayDiagnostic = $dayDiagnostic;
+
+        return $this;
+    }
+
+    public function getInfiltrates(): ?bool
+    {
+        return $this->infiltrates;
+    }
+
+    public function setInfiltrates(?bool $infiltrates): self
+    {
+        $this->infiltrates = $infiltrates;
+
+        return $this;
+    }
+
+    public function getTreatment(): ?bool
+    {
+        return $this->treatment;
+    }
+
+    public function setTreatment(?bool $treatment): self
+    {
+        $this->treatment = $treatment;
+
+        return $this;
+    }
+
+    public function getTreatmentDetails(): ?string
+    {
+        return $this->treatmentDetails;
+    }
+
+    public function setTreatmentDetails(?string $treatmentDetails): self
+    {
+        $this->treatmentDetails = $treatmentDetails;
+
+        return $this;
+    }
+
+    public function getDateTreatment(): ?\DateTimeInterface
+    {
+        return $this->dateTreatment;
+    }
+
+    public function setDateTreatment(?\DateTimeInterface $dateTreatment): self
+    {
+        $this->dateTreatment = $dateTreatment;
+
+        return $this;
+    }
+
+    public function getOtherPeople(): ?bool
+    {
+        return $this->otherPeople;
+    }
+
+    public function setOtherPeople(?bool $otherPeople): self
+    {
+        $this->otherPeople = $otherPeople;
+
+        return $this;
+    }
+
+    public function getOtherPeopleDetails(): ?string
+    {
+        return $this->otherPeopleDetails;
+    }
+
+    public function setOtherPeopleDetails(?string $otherPeopleDetails): self
+    {
+        $this->otherPeopleDetails = $otherPeopleDetails;
+
+        return $this;
+    }
+
+    public function getHomeFollowUp(): ?bool
+    {
+        return $this->homeFollowUp;
+    }
+
+    public function setHomeFollowUp(?bool $homeFollowUp): self
+    {
+        $this->homeFollowUp = $homeFollowUp;
 
         return $this;
     }

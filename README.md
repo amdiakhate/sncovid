@@ -11,5 +11,5 @@ Le but est de mettre en place un système de suivi et de déclaration des cas de
 
 
 ## Prérequis 
-Bonnes connaissances en PHP/Symfony
-Bonne volonté
+### Bonnes connaissances en PHP/Symfony
+### Bonne volonté

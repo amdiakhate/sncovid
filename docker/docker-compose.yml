@@ -1,0 +1,30 @@
+version: '2'
+
+services:
+  nginx:
+    build:
+      context: ./nginx
+    volumes:
+       - ./:/app
+    ports:
+      - '80:80'
+    depends_on:
+      - api
+
+  api:
+    build:
+      context: ./api
+    volumes:
+      - ./:/app
+
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - ./mysql:/var/lib/mysql
+    ports:
+      - '3307:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: covid
+      MYSQL_USER: covid
+      MYSQL_PASSWORD: covid

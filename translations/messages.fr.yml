@@ -1,0 +1,16 @@
+declare_suspicious: Déclarer un cas suspect
+firstname: Prénom
+yes: Oui
+no: Non
+suspiscious_text: Vous suspectez un cas de COvid
+personal_infos: Informations personnelles
+background_infos: Antécédents médicaux
+
+form:
+  firstname: Prénom
+  lastname: Nom
+  sex: Sexe
+  phone: Téléphone
+  address: Adresse
+  male: Homme
+  female: Féminin

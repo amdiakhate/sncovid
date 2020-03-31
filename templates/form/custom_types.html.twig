@@ -1,0 +1,13 @@
+{% block comorbidity_patient_row %}
+    {% for child in form.children if not child.rendered %}
+        <div class="col-sm-6">
+            <div class="form-group">
+                {{ question }}
+                {{ form_widget(child) }}
+                {{ form_help(child) }}
+                {{ form_errors(child) }}
+            </div>
+        </div>
+
+    {% endfor %}
+{% endblock %}

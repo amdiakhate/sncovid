@@ -9,8 +9,10 @@ personal_infos: Informations personnelles
 background_infos: Antécédents médicaux
 background_infos_message: Merci de répondre à ces questions avec le plus d'exactitude possible
 suspicious_submission_successful: Les données ont été soumises avec succès, merci de patienter, vous serez recontacté très vite.
-
+symptoms_infos: Symptômes
+symptoms_infos_message: Attention, ce point est très important. Il faut également savoir qu'il est possible d'être porteur du virus, sans présenter de symptômes.
 form:
+  haveSymptoms: Présentez-vous des symptômes du Covid-19 ?
   firstname: Prénom *
   lastname: Nom *
   sex: Sexe *

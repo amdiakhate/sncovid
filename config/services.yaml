@@ -32,3 +32,9 @@ services:
         arguments: [~, App\Entity\Comorbidity, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Comorbidity }
+
+    admin.symptom:
+        class: App\Admin\SymptomAdmin
+        arguments: [~, App\Entity\Symptom, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Symptom }

@@ -4,9 +4,13 @@ namespace App\Controller;
 
 use App\Entity\ComorbidityPatient;
 use App\Entity\Patient;
+use App\Entity\SymptomPatient;
 use App\Form\ComorbidityPatientType;
+use App\Form\SymptomPatientType;
 use App\Manager\PatientManager;
 use App\Repository\ComorbidityRepository;
+use App\Repository\SymptomRepository;
+use phpDocumentor\Reflection\Type;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -30,12 +34,14 @@ class PatientController extends AbstractController
     public function suspicious(
         Request $request,
         ComorbidityRepository $comorbidityRepository,
+        SymptomRepository $symptomRepository,
         PatientManager $patientManager
     ) {
         $patient = new Patient();
         $comorbidities = $comorbidityRepository->findAll();
+        $symptoms = $symptomRepository->findAll();
 
-        $form = $this->generateSuspisciousForm($patient, $comorbidities);
+        $form = $this->generateSuspisciousForm($patient, $comorbidities, $symptoms);
 
         $form->handleRequest($request);
 
@@ -51,8 +57,17 @@ class PatientController extends AbstractController
                 $comorbidyPatient->setValue($form[$comorbidity->getName()]->getData()['value']);
                 $comorbiditiesPatient[] = $comorbidyPatient;
             }
+            $symptomsPatient = [];
+            foreach ($symptoms as $symptom) {
+//                Get the comorbidities as well
+                $symptomPatient = new SymptomPatient();
+                $symptomPatient->setPatient($patient);
+                $symptomPatient->setSymptom($symptom);
+                $symptomPatient->setValue($form[$symptom->getName()]->getData()['value']);
+                $symptomsPatient[] = $symptomPatient;
+            }
 
-            $save = $patientManager->savePatient($patient, $comorbiditiesPatient);
+            $save = $patientManager->savePatient($patient, $comorbiditiesPatient, $symptomsPatient);
             if ($save) {
                 return $this->render('user/suspicious/success.html.twig');
             }
@@ -64,11 +79,12 @@ class PatientController extends AbstractController
             [
                 'form' => $form->createView(),
                 'comorbidities' => $comorbidities,
+                'symptoms' => $symptoms,
             ]
         );
     }
 
-    private function generateSuspisciousForm($patient, array $comorbidities, bool $complete = false)
+    private function generateSuspisciousForm($patient, array $comorbidities, array $symptoms, bool $complete = false)
     {
         $form = $this->createFormBuilder($patient)
             ->add(
@@ -100,7 +116,7 @@ class PatientController extends AbstractController
                 'bithdate',
                 DateType::class,
                 [
-                    'label'=>'form.birthdate',
+                    'label' => 'form.birthdate',
                     'widget' => 'single_text',
                 ]
             )
@@ -123,6 +139,17 @@ class PatientController extends AbstractController
                 EmailType::class,
                 [
                     'label' => 'form.email',
+                ]
+            )
+            ->add(
+                'haveSymptoms',
+                ChoiceType::class,
+                [
+                    'label' => 'form.haveSymptoms',
+                    'choices' => [
+                        'yes' => 'yes',
+                        'no' => 'no'
+                    ],
                 ]
             )
             ->add(
@@ -163,6 +190,16 @@ class PatientController extends AbstractController
                 [
                     'mapped' => false,
                     'question' => $comorbidity->getQuestion(),
+                ]
+            );
+        }
+        foreach ($symptoms as $symptom) {
+            $form->add(
+                $symptom->getName(),
+                SymptomPatientType::class,
+                [
+                    'mapped' => false,
+                    'question' => $symptom->getQuestion(),
                 ]
             );
         }

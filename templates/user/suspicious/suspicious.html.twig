@@ -5,7 +5,7 @@
     <h1 class="text-center header">{% trans %}declare_suspicious{% endtrans %}</h1>
 
     <div class="alert alert-warning text-center" role="alert">
-        <i class="fas fa-exclamation-triangle"></i>  {% trans %}suspiscious_text{% endtrans %}
+        <i class="fas fa-exclamation-triangle"></i> {% trans %}suspiscious_text{% endtrans %}
     </div>
 
     <div class="suspicious-form-container">
@@ -14,11 +14,28 @@
             <div class="col-md-12">
                 {{ form_start(form) }}
 
+                <div class="container-fluid ">
+                    <h2>{% trans %}symptoms_infos{% endtrans %}</h2>
+                    <div class="alert alert-danger" role="alert">
+                        <i class="fas fa-exclamation-triangle"></i> {% trans %}symptoms_infos_message{% endtrans %}
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            {{ form_row(form.haveSymptoms) }}
+                        </div>
+                        {% for symptom in symptoms %}
+                            {% set name = symptom.name %}
+                            {{ form_row(attribute(form, name)) }}
+                        {% endfor %}
+                    </div>
+
+                </div>
+
 
                 <div class="container-fluid">
                     <h2>{% trans %}personal_infos{% endtrans %}</h2>
                     <div class="alert alert-success" role="alert">
-                        <i class="fas fa-user-shield"></i>   {% trans %}security_informations{% endtrans %}
+                        <i class="fas fa-user-shield"></i> {% trans %}security_informations{% endtrans %}
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
@@ -42,11 +59,15 @@
                 <div class="container-fluid ">
                     <h2>{% trans %}background_infos{% endtrans %}</h2>
                     <div class="alert alert-danger" role="alert">
-                        <i class="fas fa-exclamation-triangle"></i>     {% trans %}background_infos_message{% endtrans %}
+                        <i class="fas fa-exclamation-triangle"></i> {% trans %}background_infos_message{% endtrans %}
                     </div>
                     {{ form_row(form.pregnant) }}
                     {{ form_row(form.background ) }}
                     <div class="row">
+                        {% for comorbidity in comorbidities %}
+                            {% set name = comorbidity.name %}
+                            {{ form_row(attribute(form, name)) }}
+                        {% endfor %}
                         {{ form_rest(form) }}
                     </div>
                     <input type="submit" class="btn btn-primary" value="{% trans %}form.save{% endtrans %}">

@@ -2,11 +2,8 @@
 
 namespace App\Manager;
 
-use App\Entity\ComorbidityPatient;
 use App\Entity\Patient;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 
 class PatientManager
 {
@@ -22,15 +19,19 @@ class PatientManager
     }
 
     /**
-     * @param Patient              $patient
-     * @param ComorbidityPatient[] $comorbiditiesPatients
+     * @param Patient $patient
+     * @param array   $comorbiditiesPatients
+     * @param array   $symptomsPatient
      * @return Patient
      */
-    public function savePatient(Patient $patient, array $comorbiditiesPatients)
+    public function savePatient(Patient $patient, array $comorbiditiesPatients, array $symptomsPatient)
     {
         $this->entityManager->persist($patient);
         foreach ($comorbiditiesPatients as $comorbidityPatient) {
             $this->entityManager->persist($comorbidityPatient);
+        }
+        foreach ($symptomsPatient as $symptomPatient) {
+            $this->entityManager->persist($symptomPatient);
         }
         $this->entityManager->flush();
 

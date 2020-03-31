@@ -133,9 +133,20 @@ class Patient
      */
     private $homeFollowUp;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\SymptomPatient", mappedBy="patient", orphanRemoval=true)
+     */
+    private $symptomPatients;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $haveSymptoms;
+
     public function __construct()
     {
         $this->comorbidityPatients = new ArrayCollection();
+        $this->symptomPatients = new ArrayCollection();
     }
 
 
@@ -436,6 +447,49 @@ class Patient
     public function setHomeFollowUp(?bool $homeFollowUp): self
     {
         $this->homeFollowUp = $homeFollowUp;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SymptomPatient[]
+     */
+    public function getSymptomPatients(): Collection
+    {
+        return $this->symptomPatients;
+    }
+
+    public function addSymptomPatient(SymptomPatient $symptomPatient): self
+    {
+        if (!$this->symptomPatients->contains($symptomPatient)) {
+            $this->symptomPatients[] = $symptomPatient;
+            $symptomPatient->setPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSymptomPatient(SymptomPatient $symptomPatient): self
+    {
+        if ($this->symptomPatients->contains($symptomPatient)) {
+            $this->symptomPatients->removeElement($symptomPatient);
+            // set the owning side to null (unless already changed)
+            if ($symptomPatient->getPatient() === $this) {
+                $symptomPatient->setPatient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getHaveSymptoms(): ?bool
+    {
+        return $this->haveSymptoms;
+    }
+
+    public function setHaveSymptoms(bool $haveSymptoms): self
+    {
+        $this->haveSymptoms = $haveSymptoms;
 
         return $this;
     }

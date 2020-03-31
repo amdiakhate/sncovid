@@ -1,4 +1,5 @@
 declare_suspicious: Déclaration d'un cas suspect
+suspicious_submission_intro: Le Coronavirus sévit dans notre pays et malheureusement personne n'est à l'abri. Les lignes directes vers le SAMU étant saturées, il est possible d'utiliser ce formulaire en cas de doute avéré sur un cas de Covid-19. Si vous présentez certains <a href="https://www.topsante.com/medecine/maladies-infectieuses/zoonoses/coronavirus-chinois-quels-sont-les-symptomes-qui-doivent-alerter-634746">symptômes</a> du Covid-19 ou que vous revenez d'un pays jugé à risque, merci de le déclarer. Un professionel de santé prendra contact avous vous dans les 48h.
 firstname: Prénom
 yes: Oui
 no: Non

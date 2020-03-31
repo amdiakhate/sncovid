@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block title %} {% trans %} Declare a suspicious case {% endtrans %}{% endblock %}
+{% block body %}
+
+    <h1 class="text-center header">{% trans %}declare_suspicious{% endtrans %}</h1>
+
+
+
+    <div class="suspicious-form-container">
+
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="alert text-center alert-info" role="alert">
+                    {% trans %}suspicious_submission_intro{% endtrans %} <br/>
+                    <a class="btn btn-danger" href="{{ path('suspicious') }}">Déclarer</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -30,11 +30,13 @@ class PatientManager
 
         if ($comorbiditiesPatients) {
             foreach ($comorbiditiesPatients as $comorbidityPatient) {
+                $patient->addComorbidityPatient($comorbidityPatient);
                 $this->entityManager->persist($comorbidityPatient);
             }
         }
         if ($symptomsPatient) {
             foreach ($symptomsPatient as $symptomPatient) {
+                $patient->addSymptomPatient($symptomPatient);
                 $this->entityManager->persist($symptomPatient);
             }
         }

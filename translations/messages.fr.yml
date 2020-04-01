@@ -10,7 +10,7 @@ background_infos: Antécédents médicaux
 background_infos_message: Merci de répondre à ces questions avec le plus d'exactitude possible
 suspicious_submission_successful: Les données ont été soumises avec succès, merci de patienter, vous serez recontacté très vite si jamais votre cas se révèle être inquiétant.
 suspicious_response:
-  very_likely: Attention,votre cas est suspect de Coronavirus, nous allons vous rappeler pour des précisions supplémentaires et vous indiquer la conduite à tenir.
+  very_likely: Attention, votre cas est suspect de Coronavirus, nous allons vous rappeler pour des précisions supplémentaires et vous indiquer la conduite à tenir.
   likely: Botre cas mérite intérêt, nous vous rappellerons pour quelques précisions.
   unlikely: Il est peu probable que vous soyez atteint de Coronavirus, rapprochez vous de votre médecin traitant.
   case_contact: Attention, votre cas n'est pas nécessairement suspect de Coronavirus, cependant nous vous recommandons fortement de vous confiner pendant 14 jours. Nous allons vous rappeler pour des précisions supplémentaires et vous indiquer la conduite à tenir.

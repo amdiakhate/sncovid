@@ -75,7 +75,7 @@ class PatientController extends AbstractController
                 return $this->render(
                     'user/suspicious/success.html.twig',
                     [
-                        'patient' => $save,
+                        'patient' => $patient,
                     ]
                 );
             }

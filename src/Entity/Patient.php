@@ -568,13 +568,9 @@ class Patient
      */
     public function getScore(): int
     {
-        $symptomPatients = $this->getSymptomPatients();
         $score = 0;
 
-        if (empty($symptomPatients)) {
-            return $score;
-        }
-        foreach ($symptomPatients as $symptomPatient) {
+        foreach ( $this->getSymptomPatients() as $symptomPatient) {
             if($symptomPatient->getValue() == 'yes'){
                 $score += $symptomPatient->getSymptom()->getQuotation();
             }

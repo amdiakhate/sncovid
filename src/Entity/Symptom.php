@@ -32,6 +32,11 @@ class Symptom
      */
     private $symptomPatients;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $quotation;
+
     public function __construct()
     {
         $this->symptomPatients = new ArrayCollection();
@@ -98,6 +103,18 @@ class Symptom
                 $symptomPatient->setSymptom(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getQuotation(): ?int
+    {
+        return $this->quotation;
+    }
+
+    public function setQuotation(int $quotation): self
+    {
+        $this->quotation = $quotation;
 
         return $this;
     }

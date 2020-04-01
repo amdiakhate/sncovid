@@ -72,7 +72,12 @@ class PatientController extends AbstractController
 
             $save = $patientManager->savePatient($patient, [], $symptomsPatient);
             if ($save) {
-                return $this->render('user/suspicious/success.html.twig');
+                return $this->render(
+                    'user/suspicious/success.html.twig',
+                    [
+                        'patient' => $save,
+                    ]
+                );
             }
 
         }

@@ -172,8 +172,6 @@ class Patient
         $this->setCaseContact(false);
     }
 
-
-
     public function getId(): ?int
     {
         return $this->id;
@@ -564,4 +562,49 @@ class Patient
 
         return $this;
     }
+
+    /**
+     * @return int|null
+     */
+    public function getScore(): int
+    {
+        $symptomPatients = $this->getSymptomPatients();
+        $score = 0;
+
+        if (empty($symptomPatients)) {
+            return $score;
+        }
+        foreach ($symptomPatients as $symptomPatient) {
+            $score += $symptomPatient->getSymptom()->getQuotation();
+        }
+
+        if ($this->getVisitedCountry()) {
+            $score += 1;
+        }
+
+        return $score;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLikelyHood()
+    {
+        $score = $this->getScore();
+        if ($this->getCaseContact() && $score <= 3) {
+            return 'case_contact';
+        }
+
+        switch (true) {
+            case in_array($score, range(0, 3)):
+                return 'unlikely';
+            case in_array($score, range(3, 5)):
+                return 'likely';
+            case $score > 5:
+                return 'very_likely';
+        }
+
+        return 'unlikely';
+    }
+
 }

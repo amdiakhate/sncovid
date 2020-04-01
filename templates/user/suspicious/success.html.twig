@@ -10,9 +10,26 @@
 
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="alert text-center alert-info" role="alert">
-                    {% trans %}suspicious_submission_successful{% endtrans %}
-                </div>
+                {% set likelyhood = patient.likelyHood %}
+                {% if likelyhood == 'likely' %}
+                    <div class="alert text-center alert-warning" role="alert">
+                        {% trans %}suspicious_response.likely{% endtrans %}
+                    </div>
+
+                {% elseif likelyhood == 'very_likely' %}
+                    <div class="alert text-center alert-danger" role="alert">
+                        {% trans %}suspicious_response.very_likely{% endtrans %}
+                    </div>
+                {% elseif likelyhood == 'unlikely' %}
+                    <div class="alert text-center alert-info" role="alert">
+                        {% trans %}suspicious_response.unlikely{% endtrans %}
+                    </div>
+                {% elseif likelyhood == 'case_contact' %}
+                    <div class="alert text-center alert-danger" role="alert">
+                        {% trans %}suspicious_response.case_contact{% endtrans %}
+                    </div>
+                {% endif %}
+
             </div>
 
         </div>

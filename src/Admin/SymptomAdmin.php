@@ -14,17 +14,20 @@ final class SymptomAdmin extends AbstractAdmin
     {
         $formMapper->add('name', TextType::class);
         $formMapper->add('question', TextType::class);
+        $formMapper->add('quotation');
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('name');
         $datagridMapper->add('question');
+        $datagridMapper->add('quotation');
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper->addIdentifier('name');
         $listMapper->addIdentifier('question');
+        $listMapper->addIdentifier('quotation');
     }
 }

@@ -28,12 +28,12 @@ class PatientManager
     {
         $this->entityManager->persist($patient);
 
-        if ($symptomsPatient) {
+        if ($comorbiditiesPatients) {
             foreach ($comorbiditiesPatients as $comorbidityPatient) {
                 $this->entityManager->persist($comorbidityPatient);
             }
         }
-        if ($comorbiditiesPatients) {
+        if ($symptomsPatient) {
             foreach ($symptomsPatient as $symptomPatient) {
                 $this->entityManager->persist($symptomPatient);
             }

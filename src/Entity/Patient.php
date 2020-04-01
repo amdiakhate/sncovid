@@ -575,7 +575,9 @@ class Patient
             return $score;
         }
         foreach ($symptomPatients as $symptomPatient) {
-            $score += $symptomPatient->getSymptom()->getQuotation();
+            if($symptomPatient->getValue() == 'yes'){
+                $score += $symptomPatient->getSymptom()->getQuotation();
+            }
         }
 
         if ($this->getVisitedCountry()) {

@@ -143,10 +143,33 @@ class Patient
      */
     private $haveSymptoms;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $visitedCountry;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $whichCountry;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $caseContact;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $caseContactWho;
+
     public function __construct()
     {
         $this->comorbidityPatients = new ArrayCollection();
         $this->symptomPatients = new ArrayCollection();
+        $this->setHaveSymptoms(false);
+        $this->setVisitedCountry(false);
+        $this->setCaseContact(false);
     }
 
 
@@ -490,6 +513,54 @@ class Patient
     public function setHaveSymptoms(bool $haveSymptoms): self
     {
         $this->haveSymptoms = $haveSymptoms;
+
+        return $this;
+    }
+
+    public function getVisitedCountry(): ?bool
+    {
+        return $this->visitedCountry;
+    }
+
+    public function setVisitedCountry(bool $visitedCountry): self
+    {
+        $this->visitedCountry = $visitedCountry;
+
+        return $this;
+    }
+
+    public function getWhichCountry(): ?string
+    {
+        return $this->whichCountry;
+    }
+
+    public function setWhichCountry(?string $whichCountry): self
+    {
+        $this->whichCountry = $whichCountry;
+
+        return $this;
+    }
+
+    public function getCaseContact(): ?bool
+    {
+        return $this->caseContact;
+    }
+
+    public function setCaseContact(bool $caseContact): self
+    {
+        $this->caseContact = $caseContact;
+
+        return $this;
+    }
+
+    public function getCaseContactWho(): ?string
+    {
+        return $this->caseContactWho;
+    }
+
+    public function setCaseContactWho(?string $caseContactWho): self
+    {
+        $this->caseContactWho = $caseContactWho;
 
         return $this;
     }

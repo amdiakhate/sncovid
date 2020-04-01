@@ -38,36 +38,39 @@ class PatientController extends AbstractController
         PatientManager $patientManager
     ) {
         $patient = new Patient();
-        $comorbidities = $comorbidityRepository->findAll();
+//        $comorbidities = $comorbidityRepository->findAll();
         $symptoms = $symptomRepository->findAll();
 
-        $form = $this->generateSuspisciousForm($patient, $comorbidities, $symptoms);
+        $form = $this->generateSuspisciousForm($patient, [], $symptoms);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $patient = $form->getData();
             $patient->setSelfDeclare(true);
-            $comorbiditiesPatient = [];
-            foreach ($comorbidities as $comorbidity) {
-//                Get the comorbidities as well
-                $comorbidyPatient = new ComorbidityPatient();
-                $comorbidyPatient->setPatient($patient);
-                $comorbidyPatient->setComorbidity($comorbidity);
-                $comorbidyPatient->setValue($form[$comorbidity->getName()]->getData()['value']);
-                $comorbiditiesPatient[] = $comorbidyPatient;
-            }
+//            $comorbiditiesPatient = [];
+//            foreach ($comorbidities as $comorbidity) {
+////                Get the comorbidities as well
+//                $comorbidyPatient = new ComorbidityPatient();
+//                $comorbidyPatient->setPatient($patient);
+//                $comorbidyPatient->setComorbidity($comorbidity);
+//                $comorbidyPatient->setValue($form[$comorbidity->getName()]->getData()['value']);
+//                $comorbiditiesPatient[] = $comorbidyPatient;
+//            }
             $symptomsPatient = [];
-            foreach ($symptoms as $symptom) {
-//                Get the comorbidities as well
-                $symptomPatient = new SymptomPatient();
-                $symptomPatient->setPatient($patient);
-                $symptomPatient->setSymptom($symptom);
-                $symptomPatient->setValue($form[$symptom->getName()]->getData()['value']);
-                $symptomsPatient[] = $symptomPatient;
+            if ($patient->getHaveSymptoms()) {
+                foreach ($symptoms as $symptom) {
+//                Get the symptoms as well
+                    $symptomPatient = new SymptomPatient();
+                    $symptomPatient->setPatient($patient);
+                    $symptomPatient->setSymptom($symptom);
+                    $symptomPatient->setValue($form[$symptom->getName()]->getData()['value']);
+                    $symptomsPatient[] = $symptomPatient;
+                }
+
             }
 
-            $save = $patientManager->savePatient($patient, $comorbiditiesPatient, $symptomsPatient);
+            $save = $patientManager->savePatient($patient, [], $symptomsPatient);
             if ($save) {
                 return $this->render('user/suspicious/success.html.twig');
             }
@@ -78,7 +81,7 @@ class PatientController extends AbstractController
             'user/suspicious/suspicious.html.twig',
             [
                 'form' => $form->createView(),
-                'comorbidities' => $comorbidities,
+                'comorbidities' => null,
                 'symptoms' => $symptoms,
             ]
         );
@@ -147,9 +150,47 @@ class PatientController extends AbstractController
                 [
                     'label' => 'form.haveSymptoms',
                     'choices' => [
-                        'yes' => 'yes',
-                        'no' => 'no'
+                        'yes' => 1,
+                        'no' => 0,
                     ],
+                ]
+            )
+            ->add(
+                'visitedCountry',
+                ChoiceType::class,
+                [
+                    'label' => 'form.visitedCountry',
+                    'choices' => [
+                        'yes' => 1,
+                        'no' => 0,
+                    ],
+                ]
+            )
+            ->add(
+                'whichCountry',
+                TelType::class,
+                [
+                    'required' => false,
+                    'label' => 'form.whichCountry',
+                ]
+            )
+            ->add(
+                'caseContact',
+                ChoiceType::class,
+                [
+                    'label' => 'form.caseContact',
+                    'choices' => [
+                        'yes' => 1,
+                        'no' => 0,
+                    ],
+                ]
+            )
+            ->add(
+                'caseContactWho',
+                TelType::class,
+                [
+                    'required' => false,
+                    'label' => 'form.caseContactWho',
                 ]
             )
             ->add(
@@ -183,16 +224,19 @@ class PatientController extends AbstractController
                 ]
             );
 
-        foreach ($comorbidities as $comorbidity) {
-            $form->add(
-                $comorbidity->getName(),
-                ComorbidityPatientType::class,
-                [
-                    'mapped' => false,
-                    'question' => $comorbidity->getQuestion(),
-                ]
-            );
+        if ($complete) {
+            foreach ($comorbidities as $comorbidity) {
+                $form->add(
+                    $comorbidity->getName(),
+                    ComorbidityPatientType::class,
+                    [
+                        'mapped' => false,
+                        'question' => $comorbidity->getQuestion(),
+                    ]
+                );
+            }
         }
+
         foreach ($symptoms as $symptom) {
             $form->add(
                 $symptom->getName(),

@@ -21,12 +21,26 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
+                            {{ form_row(form.visitedCountry) }}
+                           <div id="whichCountry"> {{ form_row(form.whichCountry) }}</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            {{ form_row(form.caseContact) }}
+                           <div id="caseContactWho"> {{ form_row(form.caseContactWho) }}</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
                             {{ form_row(form.haveSymptoms) }}
                         </div>
-                        {% for symptom in symptoms %}
-                            {% set name = symptom.name %}
-                            {{ form_row(attribute(form, name)) }}
-                        {% endfor %}
+                        <div id="symptoms">
+                            {% for symptom in symptoms %}
+                                {% set name = symptom.name %}
+                                {{ form_row(attribute(form, name)) }}
+                            {% endfor %}
+                        </div>
                     </div>
 
                 </div>
@@ -56,24 +70,25 @@
 
                 </div>
 
-                <div class="container-fluid ">
-                    <h2>{% trans %}background_infos{% endtrans %}</h2>
-                    <div class="alert alert-danger" role="alert">
-                        <i class="fas fa-exclamation-triangle"></i> {% trans %}background_infos_message{% endtrans %}
-                    </div>
-                    {{ form_row(form.pregnant) }}
-                    {{ form_row(form.background ) }}
-                    <div class="row">
-                        {% for comorbidity in comorbidities %}
-                            {% set name = comorbidity.name %}
-                            {{ form_row(attribute(form, name)) }}
-                        {% endfor %}
-                        {{ form_rest(form) }}
-                    </div>
-                    <input type="submit" class="btn btn-primary" value="{% trans %}form.save{% endtrans %}">
+                {% if comorbidities is not null %}
+                    <div class="container-fluid ">
+                        <h2>{% trans %}background_infos{% endtrans %}</h2>
+                        <div class="alert alert-danger" role="alert">
+                            <i class="fas fa-exclamation-triangle"></i> {% trans %}background_infos_message{% endtrans %}
+                        </div>
+                        {{ form_row(form.pregnant) }}
+                        {{ form_row(form.background ) }}
+                        <div class="row">
+                            {% for comorbidity in comorbidities %}
+                                {% set name = comorbidity.name %}
+                                {{ form_row(attribute(form, name)) }}
+                            {% endfor %}
+                        </div>
 
-                </div>
-
+                    </div>
+                {% endif %}
+                <input type="submit" class="btn btn-primary" value="{% trans %}form.save{% endtrans %}">
+                {{ form_row(form._token) }}
             </div>
 
         </div>
@@ -84,6 +99,7 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="{{ asset('js/patient.js') }}"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
     <script>
         jQuery(document).ready(function () {

@@ -27,12 +27,18 @@ class PatientManager
     public function savePatient(Patient $patient, array $comorbiditiesPatients, array $symptomsPatient)
     {
         $this->entityManager->persist($patient);
-        foreach ($comorbiditiesPatients as $comorbidityPatient) {
-            $this->entityManager->persist($comorbidityPatient);
+
+        if ($symptomsPatient) {
+            foreach ($comorbiditiesPatients as $comorbidityPatient) {
+                $this->entityManager->persist($comorbidityPatient);
+            }
         }
-        foreach ($symptomsPatient as $symptomPatient) {
-            $this->entityManager->persist($symptomPatient);
+        if ($comorbiditiesPatients) {
+            foreach ($symptomsPatient as $symptomPatient) {
+                $this->entityManager->persist($symptomPatient);
+            }
         }
+
         $this->entityManager->flush();
 
         return $patient;

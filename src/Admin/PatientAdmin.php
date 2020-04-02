@@ -42,8 +42,8 @@ final class PatientAdmin extends AbstractAdmin
                 [
                     'label' => 'form.admin.sex',
                     'choices' => [
-                        'male' => 'Homme',
-                        'female' => 'Féminin',
+                        'form.admin.male' => 'h',
+                        'form.admin.female' => 'f',
                     ],
                 ]
             )

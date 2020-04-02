@@ -12,7 +12,7 @@ final class SymptomPatientAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('symptom', null,  [
+        $formMapper->add('question', null,  [
             'label' => 'form.admin.symptom',
         ]);
     }

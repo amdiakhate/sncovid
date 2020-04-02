@@ -27,11 +27,11 @@ form:
     haveSymptoms: Présentez-vous des symptômes du Covid-19 ?
     firstname: Prénom
     lastname: Nom
-    sex: Sexe *
+    sex: Sexe
     birthdate: Date de naissance
-    email: Adresse email *
-    phone: Téléphone *
-    address: Adresse *
+    email: Adresse email
+    phone: Téléphone
+    address: Adresse
     male: Homme
     female: Féminin
     pregnant: Si vous êtes une femme, cochez cette case si vous êtes enceinte
@@ -49,6 +49,7 @@ form:
     yes: Oui
     no: Non
     covidTab: Informations sur l’infection Covid-19
+    ville: Ville
     covid: Questionnaire
     initialInfection: Type de présentation initiale de l’infection COVID
     daySymptoms: J1 du début des symptômes

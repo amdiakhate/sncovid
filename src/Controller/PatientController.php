@@ -38,25 +38,18 @@ class PatientController extends AbstractController
         PatientManager $patientManager
     ) {
         $patient = new Patient();
-//        $comorbidities = $comorbidityRepository->findAll();
         $symptoms = $symptomRepository->findAll();
-
         $form = $this->generateSuspisciousForm($patient, [], $symptoms);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /**
+             * @var Patient $patient
+             */
             $patient = $form->getData();
             $patient->setSelfDeclare(true);
-//            $comorbiditiesPatient = [];
-//            foreach ($comorbidities as $comorbidity) {
-////                Get the comorbidities as well
-//                $comorbidyPatient = new ComorbidityPatient();
-//                $comorbidyPatient->setPatient($patient);
-//                $comorbidyPatient->setComorbidity($comorbidity);
-//                $comorbidyPatient->setValue($form[$comorbidity->getName()]->getData()['value']);
-//                $comorbiditiesPatient[] = $comorbidyPatient;
-//            }
+            $patient->setSelfDeclare(true);
             $symptomsPatient = [];
             if ($patient->getHaveSymptoms()) {
                 foreach ($symptoms as $symptom) {
@@ -252,8 +245,6 @@ class PatientController extends AbstractController
                 ]
             );
         }
-
-//            Todo  we're creating a real patient
 
         return $form
             ->getForm();

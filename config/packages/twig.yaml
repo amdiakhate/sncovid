@@ -6,3 +6,4 @@ twig:
     form_themes:
         - 'bootstrap_4_layout.html.twig'
         - 'form/custom_types.html.twig'
+        - '@SonataCore/Form/datepicker.html.twig'

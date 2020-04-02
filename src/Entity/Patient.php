@@ -36,10 +36,10 @@ class Patient
     /**
      * @ORM\Column(type="date")
      */
-    private $bithdate;
+    private $birthdate;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
     private $address;
 
@@ -74,7 +74,7 @@ class Patient
     private $background;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ComorbidityPatient", mappedBy="patient", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\ComorbidityPatient", mappedBy="patient", cascade={"persist","remove"} , orphanRemoval=true)
      */
     private $comorbidityPatients;
 
@@ -134,7 +134,8 @@ class Patient
     private $homeFollowUp;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\SymptomPatient", mappedBy="patient", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\SymptomPatient", mappedBy="patient",cascade={"persist","remove"},
+     *                                                          orphanRemoval=true)
      */
     private $symptomPatients;
 
@@ -163,6 +164,11 @@ class Patient
      */
     private $caseContactWho;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $city;
+
     public function __construct()
     {
         $this->comorbidityPatients = new ArrayCollection();
@@ -170,6 +176,9 @@ class Patient
         $this->setHaveSymptoms(false);
         $this->setVisitedCountry(false);
         $this->setCaseContact(false);
+        $this->setBirthdate(new \DateTime());
+        $this->setSelfDeclare(false);
+        $this->setPregnant(false);
     }
 
     public function getId(): ?int
@@ -213,14 +222,14 @@ class Patient
         return $this;
     }
 
-    public function getBithdate(): ?\DateTimeInterface
+    public function getBirthdate(): ?\DateTimeInterface
     {
-        return $this->bithdate;
+        return $this->birthdate;
     }
 
-    public function setBithdate(\DateTimeInterface $bithdate): self
+    public function setBirthdate(\DateTimeInterface $birthdate): self
     {
-        $this->bithdate = $bithdate;
+        $this->birthdate = $birthdate;
 
         return $this;
     }
@@ -570,8 +579,8 @@ class Patient
     {
         $score = 0;
 
-        foreach ( $this->getSymptomPatients() as $symptomPatient) {
-            if($symptomPatient->getValue() == 'yes'){
+        foreach ($this->getSymptomPatients() as $symptomPatient) {
+            if ($symptomPatient->getValue() == 'yes') {
                 $score += $symptomPatient->getSymptom()->getQuotation();
             }
         }
@@ -603,6 +612,23 @@ class Patient
         }
 
         return 'unlikely';
+    }
+
+    public function __toString()
+    {
+        return $this->getFirstname().' '.$this->getLastname();
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
     }
 
 }

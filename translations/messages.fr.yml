@@ -16,7 +16,53 @@ suspicious_response:
   case_contact: Attention, votre cas n'est pas nécessairement suspect de Coronavirus, cependant nous vous recommandons fortement de vous confiner pendant 14 jours. Nous allons vous rappeler pour des précisions supplémentaires et vous indiquer la conduite à tenir.
 symptoms_infos: Questions préalables
 symptoms_infos_message: Attention, ce point est très important. Il faut également savoir qu'il est possible d'être porteur du virus, sans présenter de symptômes.
+lastname: Nom
+sex: Sexe
+birthdate: Date de naissance
+address: Adresse
+
 form:
+  admin:
+    personalInformations: Informationds personnelles
+    haveSymptoms: Présentez-vous des symptômes du Covid-19 ?
+    firstname: Prénom
+    lastname: Nom
+    sex: Sexe *
+    birthdate: Date de naissance
+    email: Adresse email *
+    phone: Téléphone *
+    address: Adresse *
+    male: Homme
+    female: Féminin
+    pregnant: Si vous êtes une femme, cochez cette case si vous êtes enceinte
+    referentDoctor: Médecin généraliste référent du patient (coordonnées)
+    background: Traitements au long cours notables
+    otherPhone: Numéro de téléphone mobile d’un contact tiers
+    save: Soumettre les données
+    visitedCountry: Avez-vous visité un pays jugé à risque dans les 14 derniers jours ?
+    whichCountry: Si oui, lesquels ?
+    caseContact: Avez-vous été en contact avec une personne malade du Covid-19 dans les 14 derniers jours ?
+    caseContactWho: Si oui, qui ? (proche, femme, enfants...)
+    symptom: Symptôme
+    comorbidity: Comorbidité
+    comorbidities: Comorbidités
+    yes: Oui
+    no: Non
+    covidTab: Informations sur l’infection Covid-19
+    covid: Questionnaire
+    initialInfection: Type de présentation initiale de l’infection COVID
+    daySymptoms: J1 du début des symptômes
+    dayDiagnostic: J1 du diagnostic virologique
+    infiltrates: Si il y eu une imagerie pulmonaire, y-avait-il des infiltrats alvéolo interstitiel
+    treatment: Traitement antiviral contre SARS-CoV-2
+    treatmentDetails: Si oui, lequel
+    dateTreatment: J1 du début du traitement antiviral si traitement
+    otherPeople: Présence de personnes dans le même logement / au domicile
+    otherPeopleDetails: Si Oui, précisez (femme, enfant, proche, etc...)
+    homeFollowUp: Suivi à domicile possible ?
+    homeFollowUpHelp: Répond aux critères de suivi à domicile (Absence de detresse respiratoire, Confinement psychologiquement possible, Confinement matériellement possible, Accepte le confinement avec suivi digital à distance)
+
+
   haveSymptoms: Présentez-vous des symptômes du Covid-19 ?
   firstname: Prénom *
   lastname: Nom *

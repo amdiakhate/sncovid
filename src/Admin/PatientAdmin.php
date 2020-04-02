@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\Form\Type\BooleanType;
 use Sonata\Form\Type\CollectionType;
 use Sonata\Form\Type\DatePickerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -308,7 +309,16 @@ final class PatientAdmin extends AbstractAdmin
         $listMapper->addIdentifier('lastname');
         $listMapper->addIdentifier('sex');
         $listMapper->addIdentifier('address');
-        $listMapper->add('score', IntegerType::class);
+        $listMapper->addIdentifier('score');
+//        $listMapper->add('score',null,[
+//            'sortable'=>true    ,  'sort_field_mapping' => array(
+//                'fieldName' => 'score' // property name of entity Country
+//            ),
+//            'sort_parent_association_mappings' => array(
+//                array('fieldName' => 'score') // property state of entity City
+//        )
+
+//        ]);
     }
 
     public function prePersist($object)

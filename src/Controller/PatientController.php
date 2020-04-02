@@ -114,7 +114,7 @@ class PatientController extends AbstractController
                 ]
             )
             ->add(
-                'bithdate',
+                'birthdate',
                 DateType::class,
                 [
                     'label' => 'form.birthdate',

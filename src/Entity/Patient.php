@@ -74,7 +74,8 @@ class Patient
     private $background;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ComorbidityPatient", mappedBy="patient", cascade={"persist","remove"} , orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\ComorbidityPatient", mappedBy="patient", cascade={"persist","remove"} ,
+     *                                                              orphanRemoval=true)
      */
     private $comorbidityPatients;
 
@@ -570,6 +571,15 @@ class Patient
         $this->caseContactWho = $caseContactWho;
 
         return $this;
+    }
+
+    public function getEmergency()
+    {
+        if ($this->getScore() > 3) {
+            return false;
+        }
+
+        return true;
     }
 
     /**

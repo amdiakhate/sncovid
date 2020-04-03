@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block title %} {% trans %} declare_suspicious {% endtrans %}{% endblock %}
+{% block body %}
+
+    <h1 class="text-center header">{% trans %}fill_survey{% endtrans %}</h1>
+
+
+
+    <div class="suspicious-form-container">
+
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="alert text-center alert-success" role="alert">
+                    {% trans %}fill_survey_success{% endtrans %}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

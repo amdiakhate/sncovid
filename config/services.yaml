@@ -26,30 +26,42 @@ services:
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones
 
+  admin.patient:
+    class: App\Admin\PatientAdmin
+    arguments: [~, App\Entity\Patient, ~]
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: Patients, label: Liste }
+  admin.survey:
+    class: App\Admin\SurveyAdmin
+    arguments: [~, App\Entity\Survey, ~]
+    tags:
+      - { name: sonata.admin, manager_type: orm,group: Patients,  label: Survey }
+  admin.question:
+    class: App\Admin\QuestionAdmin
+    arguments: [~, App\Entity\Question, ~]
+    tags:
+      - { name: sonata.admin, manager_type: orm,group: Patients,  label: Questions }
 
   admin.comorbidity:
     class: App\Admin\ComorbidityAdmin
     arguments: [~, App\Entity\Comorbidity, ~]
     tags:
-      - { name: sonata.admin, manager_type: orm, label: Comorbidity }
+      - { name: sonata.admin, manager_type: orm,group: Configuration,  label: Comorbidity }
 
   admin.symptom:
     class: App\Admin\SymptomAdmin
     arguments: [~, App\Entity\Symptom, ~]
     tags:
-      - { name: sonata.admin, manager_type: orm, label: Symptom }
-  admin.patient:
-    class: App\Admin\PatientAdmin
-    arguments: [~, App\Entity\Patient, ~]
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: Patient }
+      - { name: sonata.admin, manager_type: orm, group: Configuration, label: Symptom }
+
   admin.symptompatient:
     class: App\Admin\SymptomPatientAdmin
     arguments: [~, App\Entity\SymptomPatient, ~]
     tags:
-      - { name: sonata.admin, manager_type: orm, label: SymptomPatient , show_in_dashboard: false}
+      - { name: sonata.admin, manager_type: orm, group: Configuration, label: SymptomPatient , show_in_dashboard: false}
   admin.comorbiditypatient:
     class: App\Admin\ComorbidityPatientAdmin
     arguments: [~, App\Entity\ComorbidityPatient, ~]
     tags:
-      - { name: sonata.admin, manager_type: orm, label: ComorbidityPatient, show_in_dashboard: false }
+      - { name: sonata.admin, manager_type: orm, group: Configuration,  label: ComorbidityPatient, show_in_dashboard: false }
+

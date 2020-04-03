@@ -170,6 +170,11 @@ class Patient
      */
     private $city;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Survey", mappedBy="patient", orphanRemoval=true)
+     */
+    private $surveys;
+
     public function __construct()
     {
         $this->comorbidityPatients = new ArrayCollection();
@@ -180,6 +185,7 @@ class Patient
         $this->setBirthdate(new \DateTime());
         $this->setSelfDeclare(false);
         $this->setPregnant(false);
+        $this->surveys = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -637,6 +643,37 @@ class Patient
     public function setCity(string $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Survey[]
+     */
+    public function getSurveys(): Collection
+    {
+        return $this->surveys;
+    }
+
+    public function addSurvey(Survey $survey): self
+    {
+        if (!$this->surveys->contains($survey)) {
+            $this->surveys[] = $survey;
+            $survey->setPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSurvey(Survey $survey): self
+    {
+        if ($this->surveys->contains($survey)) {
+            $this->surveys->removeElement($survey);
+            // set the owning side to null (unless already changed)
+            if ($survey->getPatient() === $this) {
+                $survey->setPatient(null);
+            }
+        }
 
         return $this;
     }

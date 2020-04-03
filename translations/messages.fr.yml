@@ -64,6 +64,15 @@ form:
     homeFollowUpHelp: Répond aux critères de suivi à domicile (Absence de detresse respiratoire, Confinement psychologiquement possible, Confinement matériellement possible, Accepte le confinement avec suivi digital à distance)
 
 
+    help: Message d'aide si nécessaire
+    name: Nom de la question (un mot)
+    question: Intitulé de la question
+    type: Type de réponse attendu
+    type_placeholder: Choisir une option
+    number: Nombre
+    text: Texte
+    choices: Choix multiple
+
   haveSymptoms: Présentez-vous des symptômes du Covid-19 ?
   firstname: Prénom *
   lastname: Nom *
@@ -83,3 +92,11 @@ form:
   whichCountry: Si oui, lesquels ?
   caseContact: Avez-vous été en contact avec une personne malade du Covid-19 dans les 14 derniers jours ?
   caseContactWho: Si oui, qui ? (proche, femme, enfants...)
+
+
+fill_survey: Questionnaire de suivi à domicile - Coronavirus Covid 19
+fill_survey_text: Ce court questionnaire permet de suivre l’évolution de vos symptômes. Toutes les données sont revues par des équipes soignantes. Ce questionnaire sera répété régulièrement.
+  En cas d’urgence, vous pouvez contacter l’équipe médicale via le xxxx ou le SAMU centre 15.
+fill_survey_fail: Ce questionnaire a déjà été complété.
+fill_survey_success: Merci pour vos réponses.
+  Vos données sont en cours d'analyse par l'équipe médicale qui prendra contact rapidement avec vous.

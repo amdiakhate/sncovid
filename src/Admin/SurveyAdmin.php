@@ -25,6 +25,23 @@ final class SurveyAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper->addIdentifier('patient');
-        $listMapper->addIdentifier('creationDate');
+        $listMapper->addIdentifier(
+            'creationDate',
+            'date',
+            [
+                'label' => 'form.admin.creationDate',
+//                'pattern' => 'dd MMM y ',
+                'locale' => 'fr',
+
+            ]
+        );
+        $listMapper->add(
+            'status',
+            'string',
+            [
+                'label' => 'admin.survey.label',
+                'template' => 'backend/survey/list_status.html.twig',
+            ]
+        );
     }
 }

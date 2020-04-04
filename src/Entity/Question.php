@@ -133,6 +133,21 @@ class Question
         return $this->choices;
     }
 
+    /**
+     * @return array|null
+     */
+    public function getChoicesArray(): ?array
+    {
+        $questionChoices = explode(',', $this->getChoices());
+        $choices = [];
+        $i = 1;
+        foreach ($questionChoices as $questionChoice) {
+            $choices[$questionChoice] = $i;
+            $i++;
+        }
+        return $choices;
+    }
+
     public function setChoices(?string $choices): self
     {
         $this->choices = $choices;
@@ -150,5 +165,10 @@ class Question
         $this->help = $help;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getQuestion();
     }
 }

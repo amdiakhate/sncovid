@@ -1,0 +1,16 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{% block field %}
+    <div>
+        {% set status = object.status %}
+        {% if status == 'completed' %}
+            <span class="label label-success">{% trans %}admin.survey.completed{% endtrans %}</span>
+        {% elseif status == 'draft' %}
+            <span class="label label-info">{% trans %}admin.survey.draft{% endtrans %}</span>
+        {% elseif status == 'missed' %}
+            <span class="label label-danger">{% trans %}admin.survey.missed{% endtrans %}</span>
+        {% endif %}
+
+        {#        {{ object.providername}} : {{ object.width }}x{{ object.height }} <br/>#}
+    </div>
+{% endblock %}

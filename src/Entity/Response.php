@@ -38,8 +38,21 @@ class Response
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getValue(): ?string
     {
+        $type = $this->getQuestion()->getType();
+        if ($type == 'choices') {
+            $choices = $this->getQuestion()->getChoicesArray();
+            foreach ($choices as $choice) {
+                if ($this->value == $choice) {
+                    return key($choices);
+                }
+            }
+        }
+
         return $this->value;
     }
 

@@ -261,7 +261,7 @@ final class PatientAdmin extends AbstractAdmin
                 ChoiceType::class,
                 [
                     'label' => 'form.admin.otherPeople',
-                    'required' => false ,
+                    'required' => false,
                     'choices' => [
                         'form.admin.yes' => 1,
                         'form.admin.no' => 0,
@@ -305,20 +305,23 @@ final class PatientAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('firstname');
-        $listMapper->addIdentifier('lastname');
-        $listMapper->addIdentifier('sex');
-        $listMapper->addIdentifier('address');
-        $listMapper->addIdentifier('score');
-//        $listMapper->add('score',null,[
-//            'sortable'=>true    ,  'sort_field_mapping' => array(
-//                'fieldName' => 'score' // property name of entity Country
-//            ),
-//            'sort_parent_association_mappings' => array(
-//                array('fieldName' => 'score') // property state of entity City
-//        )
+        $listMapper->addIdentifier('firstname', null, ['label'=>'form.admin.firstname']);
+        $listMapper->addIdentifier('lastname', null, ['label'=>'form.admin.lastname']);
+        $listMapper->add('sex', null, ['label'=>'form.admin.sex']);
+        $listMapper->add('city', null, ['label'=>'form.admin.city']);
+        $listMapper->add('address', null, ['label'=>'form.admin.address']);
+        $listMapper->add('phone', null, ['label'=>'form.admin.phone']);
+        $listMapper->add(
+            'score',
+            'string',
+            [
+                'label' => 'admin.score.label',
+                'template' => 'backend/patient/list_score.html.twig',
+            ]
+        );
+        $listMapper->add('isBeingFollowedUp', null, ['label'=>'form.admin.beingFollowedUp']);
 
-//        ]);
+
     }
 
     public function prePersist($object)

@@ -28,6 +28,7 @@ form:
     firstname: Prénom
     lastname: Nom
     sex: Sexe
+    city: Ville
     birthdate: Date de naissance
     email: Adresse email
     phone: Téléphone
@@ -62,7 +63,8 @@ form:
     otherPeopleDetails: Si Oui, précisez (femme, enfant, proche, etc...)
     homeFollowUp: Suivi à domicile possible ?
     homeFollowUpHelp: Répond aux critères de suivi à domicile (Absence de detresse respiratoire, Confinement psychologiquement possible, Confinement matériellement possible, Accepte le confinement avec suivi digital à distance)
-
+    beingFollowedUp: Suivi à domicile
+    creationDate: Date de création
 
     help: Message d'aide si nécessaire
     name: Nom de la question (un mot)
@@ -100,3 +102,19 @@ fill_survey_text: Ce court questionnaire permet de suivre l’évolution de vos 
 fill_survey_fail: Ce questionnaire a déjà été complété.
 fill_survey_success: Merci pour vos réponses.
   Vos données sont en cours d'analyse par l'équipe médicale qui prendra contact rapidement avec vous.
+
+
+admin:
+  survey:
+    label: Questionnaire
+    completed: Complété
+    draft: Non envoyé
+    missed: Dépassé
+  score:
+    low: Basse
+    medium : Moyenne
+    high: Haute
+    label: Priorité
+
+  response:
+    value: Réponse

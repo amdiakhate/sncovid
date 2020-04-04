@@ -41,6 +41,11 @@ services:
     arguments: [~, App\Entity\Question, ~]
     tags:
       - { name: sonata.admin, manager_type: orm,group: Patients,  label: Questions }
+  admin.response:
+    class: App\Admin\ResponseAdmin
+    arguments: [~, App\Entity\Response, ~]
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: Patients,  label: Reponses }
 
   admin.comorbidity:
     class: App\Admin\ComorbidityAdmin

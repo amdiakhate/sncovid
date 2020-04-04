@@ -1,0 +1,16 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{% block field %}
+    <div>
+        {% set score = object.score %}
+        {% if score > 3 and score < 5 %}
+            <span class="label label-warning">{% trans %}admin.score.medium{% endtrans %}</span>
+        {% elseif score >=5 %}
+            <span class="label label-danger">{% trans %}admin.score.high{% endtrans %}</span>
+        {% else %}
+            <span class="label label-primary">{% trans %}admin.score.low{% endtrans %}</span>
+        {% endif %}
+
+        {#        {{ object.providername}} : {{ object.width }}x{{ object.height }} <br/>#}
+    </div>
+{% endblock %}

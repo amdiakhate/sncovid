@@ -175,6 +175,11 @@ class Patient
      */
     private $surveys;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isBeingFollowedUp;
+
     public function __construct()
     {
         $this->comorbidityPatients = new ArrayCollection();
@@ -185,6 +190,7 @@ class Patient
         $this->setBirthdate(new \DateTime());
         $this->setSelfDeclare(false);
         $this->setPregnant(false);
+        $this->setIsBeingFollowedUp(false);
         $this->surveys = new ArrayCollection();
     }
 
@@ -674,6 +680,18 @@ class Patient
                 $survey->setPatient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsBeingFollowedUp(): ?bool
+    {
+        return $this->isBeingFollowedUp;
+    }
+
+    public function setIsBeingFollowedUp(bool $isBeingFollowedUp): self
+    {
+        $this->isBeingFollowedUp = $isBeingFollowedUp;
 
         return $this;
     }

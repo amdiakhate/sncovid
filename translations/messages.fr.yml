@@ -105,6 +105,16 @@ fill_survey_success: Merci pour vos réponses.
 
 
 admin:
+  comorbidity:
+    singular: Comorbidité
+    plural: Comorbidités
+    question: Question à poser
+    name: Nom
+  symptom:
+    plural: Symptômes
+    name: Nom
+    question : Question à poser
+    quotation: Coefficient
   survey:
     label: Questionnaire de suivi
     status: Statut

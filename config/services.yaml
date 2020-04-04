@@ -49,13 +49,13 @@ services:
     class: App\Admin\ComorbidityAdmin
     arguments: [~, App\Entity\Comorbidity, ~]
     tags:
-      - { name: sonata.admin, manager_type: orm,group: Configuration,  label: Comorbidity }
+      - { name: sonata.admin, manager_type: orm,group: Configuration,  label: admin.comorbidity.plural }
 
   admin.symptom:
     class: App\Admin\SymptomAdmin
     arguments: [~, App\Entity\Symptom, ~]
     tags:
-      - { name: sonata.admin, manager_type: orm, group: Configuration, label: Symptom }
+      - { name: sonata.admin, manager_type: orm, group: Configuration, label: admin.symptom.plural }
 
   admin.symptompatient:
     class: App\Admin\SymptomPatientAdmin

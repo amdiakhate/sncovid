@@ -35,17 +35,15 @@ services:
     class: App\Admin\SurveyAdmin
     arguments: [~, App\Entity\Survey, ~]
     tags:
-      - { name: sonata.admin, manager_type: orm,group: Patients,  label: Survey }
-  admin.question:
-    class: App\Admin\QuestionAdmin
-    arguments: [~, App\Entity\Question, ~]
-    tags:
-      - { name: sonata.admin, manager_type: orm,group: Patients,  label: Questions }
+      - { name: sonata.admin, manager_type: orm,group: Patients,  label: 'admin.survey.label' }
+    calls:
+      - [addChild, ['@admin.response', 'survey']]
+
   admin.response:
     class: App\Admin\ResponseAdmin
     arguments: [~, App\Entity\Response, ~]
     tags:
-      - { name: sonata.admin, manager_type: orm, group: Patients,  label: Reponses }
+      - { name: sonata.admin, manager_type: orm, group: Patients,  label: Reponses, show_in_dashboard: false }
 
   admin.comorbidity:
     class: App\Admin\ComorbidityAdmin
@@ -70,3 +68,8 @@ services:
     tags:
       - { name: sonata.admin, manager_type: orm, group: Configuration,  label: ComorbidityPatient, show_in_dashboard: false }
 
+  admin.question:
+    class: App\Admin\QuestionAdmin
+    arguments: [~, App\Entity\Question, ~]
+    tags:
+      - { name: sonata.admin, manager_type: orm,group: Configuration,  label: Questions }

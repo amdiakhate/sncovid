@@ -106,7 +106,8 @@ fill_survey_success: Merci pour vos réponses.
 
 admin:
   survey:
-    label: Questionnaire
+    label: Questionnaire de suivi
+    status: Statut
     completed: Complété
     draft: Non envoyé
     missed: Dépassé
@@ -118,3 +119,5 @@ admin:
 
   response:
     value: Réponse
+  patient:
+    label: Patient

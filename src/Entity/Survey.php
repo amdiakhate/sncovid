@@ -135,4 +135,9 @@ class Survey
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return 'Questionnaire '.$this->getPatient().'-'. $this->getCreationDate()->format('d-m-y');
+    }
 }
